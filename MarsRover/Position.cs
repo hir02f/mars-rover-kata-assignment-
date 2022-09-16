@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace MarsRover
 {
-    public class Position : Plateau 
+    public class Position 
     {
-        public Position(int x, int y) : base(x, y)
-        {
-
-        }
-
-        private bool _isEmpty; // ie no Rover at that coordinate
-        public bool IsEmpty 
-        { 
-            get { return _isEmpty; } 
-            set { _isEmpty = true; } 
-        }
+        public int X { get; private set; }
+        public int Y { get; private set; } 
+        public int O { get; private set; } // orientation
         
+        public Position(int x, int y, char o) //: base(x, y)
+        {
+            {
+                X = x;
+                Y = y;
+                O = o;
+            }
+        }
     }
 }

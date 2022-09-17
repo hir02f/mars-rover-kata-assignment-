@@ -27,6 +27,6 @@ namespace MarsRover
         public bool PositionIsAvailable(int x, int y)
         {
             return !GridOfRovers.Any(p => p.SequenceEqual(new int[] { x, y }));
-        }
+        }   
     }
 }

@@ -9,8 +9,7 @@ namespace MarsRover
     public class Position 
     {
         public int X { get; private set; }
-        public int Y { get; private set; } 
-    //    public int O { get; private set; } // orientation
+        public int Y { get; private set; }     
         
         public Position(int x, int y)
         {
@@ -19,5 +18,16 @@ namespace MarsRover
                 Y = y; 
             }
         }
+
+        public void SetY(bool input)
+        {
+            Y = input ? Y + 1 : Y - 1;
+        }
+
+        public void SetX(bool input)
+        {
+            X = input ? X + 1 : X - 1;
+        }
     }
 }
+

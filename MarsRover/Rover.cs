@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MarsRover
 {
-    public class Rover
+    public class Rover : IMove
     {
         public Position CurrentPosition { get; private set; }
         public Plateau Plateau { get; private set; }
         public Orientation CurrentOrientation { get; private set; }    
 
         private const string VALID_ORIENTATION = "N|E|S|W";
+        private const char NORTH = 'N';
+        private const char SOUTH = 'S';
+        private const char EAST = 'E';
+        private const char WEST = 'W';
 
         public Rover(Plateau plateau)
         {
@@ -47,6 +52,24 @@ namespace MarsRover
                 }
             }
         }
-
+        public void MoveToNewPosition()
+        {
+            if (CurrentOrientation.O == NORTH)
+            {
+                CurrentPosition.SetY(true);
+            }
+            else if (CurrentOrientation.O == SOUTH)
+            {
+                CurrentPosition.SetY(false);
+            }
+            else if (CurrentOrientation.O == EAST)
+            {
+                CurrentPosition.SetX(true);
+            }
+            else if (CurrentOrientation.O == WEST)
+            {
+                CurrentPosition.SetX(false);
+            }
+        }
     }
 }

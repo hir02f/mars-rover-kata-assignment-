@@ -17,12 +17,27 @@ namespace MarsRover
             O = o;
 
             OrientationLookup.Add("NL", 'W');
+            OrientationLookup.Add("NR", 'E');
+            OrientationLookup.Add("WL", 'S');
+            OrientationLookup.Add("WR", 'N');
+            OrientationLookup.Add("EL", 'N');
+            OrientationLookup.Add("ER", 'S');
+            OrientationLookup.Add("SL", 'E');
+            OrientationLookup.Add("SR", 'W');
         }
 
         public char GetNewOrientation(char instruction)
         {
             string lookFor = O.ToString() + instruction.ToString();
-            return OrientationLookup[lookFor];         
+
+            if (OrientationLookup.ContainsKey(lookFor))
+            {
+                return OrientationLookup[lookFor];
+            }
+            else
+            {
+                throw new ArgumentException("Invalid orientation movement!");
+            }
         }
     }
 }

@@ -4,10 +4,9 @@ namespace MarsRover.Tests;
 
 public class Positioning
 {
-
+    // Same plateau for all tests, knows each testrover on it
     Plateau testPlateau = new Plateau(5, 4);
-    //Position testPosition = new Position(3, 1, 'N');
-
+  
     [SetUp]
     public void Setup()
     {
@@ -16,7 +15,6 @@ public class Positioning
     [Test]
     public void Setting_MaxXY_In_Plateau()
     {
-       // Plateau testPlateau = new Plateau(5,4);        
         testPlateau.MaxX.Should().Be(5);
         testPlateau.MaxY.Should().Be(4);
     }
@@ -41,7 +39,6 @@ public class Positioning
         var ex = Assert.Throws<ArgumentException>(() => testRover.PlaceInPosition(6, 1, 'K'));
         Assert.That(ex.Message, Is.EqualTo("Orentation must be N, E, S or W!"));
     }
-
     
     [Test]
     public void Setting_First_Rover_In_A_Valid_Position()

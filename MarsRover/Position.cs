@@ -10,14 +10,13 @@ namespace MarsRover
     {
         public int X { get; private set; }
         public int Y { get; private set; } 
-        public int O { get; private set; } // orientation
+    //    public int O { get; private set; } // orientation
         
-        public Position(int x, int y, char o) //: base(x, y)
+        public Position(int x, int y)
         {
             {
                 X = x;
-                Y = y;
-                O = o;
+                Y = y; 
             }
         }
     }

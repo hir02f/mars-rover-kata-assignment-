@@ -51,7 +51,7 @@ public class Positioning
         testRover.PlaceInPosition(3, 1, 'N');
         testRover.CurrentPosition.X.Should().Be(3);
         testRover.CurrentPosition.Y.Should().Be(1);
-        testRover.CurrentPosition.O.Should().Be('N');
+        testRover.CurrentOrientation.O.Should().Be('N');
     }
 
     [Test]
@@ -62,7 +62,7 @@ public class Positioning
         testRover.PlaceInPosition(3, 0, 'S');
         testRover.CurrentPosition.X.Should().Be(3);
         testRover.CurrentPosition.Y.Should().Be(0);
-        testRover.CurrentPosition.O.Should().Be('S');
+        testRover.CurrentOrientation.O.Should().Be('S');
     }
 
     [Test]

@@ -11,7 +11,7 @@ namespace MarsRover
         public int MaxX { get; private set; }
         public int MaxY { get; private set; }
 
-        public List<int[]> gridOfRovers = new List<int[]>();
+        public List<int[]> GridOfRovers = new List<int[]>();
 
         public Plateau(int x, int y)
         {
@@ -19,14 +19,14 @@ namespace MarsRover
             MaxY = y;
         }
 
-        public void SetGridOfRovers(int x, int y)
+        public void UpdateGrid(int x, int y)
         {
-            gridOfRovers.Add(new int[] { x, y });
+            GridOfRovers.Add(new int[] { x, y });
         }
 
-        public bool SpaceHasRover(int x, int y)
+        public bool PositionIsAvailable(int x, int y)
         {
-            return gridOfRovers.Any(p => p.SequenceEqual(new int[] { x, y }));
+            return !GridOfRovers.Any(p => p.SequenceEqual(new int[] { x, y }));
         }
     }
 }

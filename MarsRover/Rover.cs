@@ -10,6 +10,7 @@ namespace MarsRover
     {
         public Position CurrentPosition { get; private set; }
         public Plateau Plateau { get; private set; }
+        public Orientation CurrentOrientation { get; private set; }    
 
         private const string VALID_ORIENTATION = "N|E|S|W";
 
@@ -19,7 +20,7 @@ namespace MarsRover
         }
 
         public void PlaceInPosition(int x, int y, char o)
-        {
+        {        
             if (x < 0 || y < 0)
             {
                 throw new ArgumentException("Position must be more than zero!");
@@ -34,10 +35,11 @@ namespace MarsRover
             }
             else
             {
-                if (!Plateau.SpaceHasRover(x, y))
+                if (Plateau.PositionIsAvailable(x, y))
                 {
-                    CurrentPosition = new Position(x, y, o);
-                    Plateau.SetGridOfRovers(x, y);
+                    CurrentPosition = new Position(x, y);
+                    CurrentOrientation = new Orientation(o);
+                    Plateau.UpdateGrid(x, y);
                 }
                 else
                 {

@@ -16,8 +16,9 @@ public class Orientation
         testRover.CurrentPosition.X.Should().Be(1);
         testRover.CurrentPosition.Y.Should().Be(2);
        
-        testRover.CurrentOrientation.O.Should().Be('N');
-        testRover.CurrentOrientation.GetNewOrientation('L').Should().Be('W');
+        testRover.CurrentOrientation.O.Should().Be('N'); // Current Orientation
+        testRover.CurrentOrientation.GetNewOrientation('L');
+        testRover.CurrentOrientation.O.Should().Be('W'); // New Orientation
 
     }
     [Test]

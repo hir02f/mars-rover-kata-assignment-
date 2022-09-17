@@ -26,13 +26,14 @@ namespace MarsRover
             OrientationLookup.Add("SR", 'W');
         }
 
-        public char GetNewOrientation(char instruction)
+        public void GetNewOrientation(char instruction)
         {
             string lookFor = O.ToString() + instruction.ToString();
 
             if (OrientationLookup.ContainsKey(lookFor))
             {
-                return OrientationLookup[lookFor];
+                // New orientation is now the current orientation
+                O = OrientationLookup[lookFor];
             }
             else
             {

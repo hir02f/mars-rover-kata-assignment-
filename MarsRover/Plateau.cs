@@ -19,14 +19,19 @@ namespace MarsRover
             MaxY = y;
         }
 
-        public void UpdateGrid(int x, int y)
+        public void AddToGrid(int x, int y)
         {
             GridOfRovers.Add(new int[] { x, y });
         }
 
+        public void RemoveFromGrid(int x, int y)
+        {           
+            GridOfRovers.RemoveAll(arr => arr.SequenceEqual(new int[] { x, y }));
+        }
+
         public bool PositionIsAvailable(int x, int y)
         {
-            return !GridOfRovers.Any(p => p.SequenceEqual(new int[] { x, y }));
+            return !GridOfRovers.Any(arr => arr.SequenceEqual(new int[] { x, y }));
         }   
     }
 }

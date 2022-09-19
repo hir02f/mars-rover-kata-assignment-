@@ -4,11 +4,11 @@ namespace MarsRover.Tests
 {
     public class Movement
     {
-        Plateau testPlateau = new Plateau(5, 5);        
+        Plateau testPlateau = new Plateau(5, 5);
 
         [Test]
         public void Moving_LMLMLMLMM()
-        {           
+        {
             Rover testRover = new Rover(testPlateau);
 
             // Initial position and orientation
@@ -20,7 +20,7 @@ namespace MarsRover.Tests
             // L
             testRover.CurrentOrientation.GetNewOrientation('L');
             testRover.CurrentOrientation.O.Should().Be('W'); // New Orientation
-           
+
             // M
             testRover.MoveToNewPosition();
             testRover.CurrentPosition.X.Should().Be(0);      // New position
@@ -61,7 +61,23 @@ namespace MarsRover.Tests
             testRover.MoveToNewPosition();
             testRover.CurrentPosition.X.Should().Be(1);      // New position
             testRover.CurrentPosition.Y.Should().Be(3);      // New position
-            testRover.CurrentOrientation.O.Should().Be('N'); // Same Orientation                                                             
-        }        
+            testRover.CurrentOrientation.O.Should().Be('N'); // Same Orientation                                                       
+        }
+
+        [Test]
+        public void Moving_To_A_Coordinate_That_Has_A_Rover() // (1,3) has a rover from above test
+        {
+            Rover testRover = new Rover(testPlateau);
+
+            // Initial position and orientation
+            testRover.PlaceInPosition(1, 2, 'N');
+            testRover.CurrentPosition.X.Should().Be(1);
+            testRover.CurrentPosition.Y.Should().Be(2);
+            testRover.CurrentOrientation.O.Should().Be('N'); // Current Orientation
+
+            // M
+            var ex = Assert.Throws<ArgumentException>(() => testRover.MoveToNewPosition());
+            Assert.That(ex.Message, Is.EqualTo("Position (1, 3) has a rover already!"));
+        }
     }
 }

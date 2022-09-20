@@ -11,38 +11,29 @@ namespace MarsRover
         private const string VALID_ORIENTATION = "N|E|S|W";
         private const int ZERO = 0; 
 
-        public bool checkInputForPlateau(string[] plateauInputArray, List<int> plateauCoordinates)
+        public void checkInputForPlateau(string[] plateauInputArray, List<int> plateauCoordinates)
         {
             foreach (var coord in plateauInputArray)
-            {
-                try
-                {
-                    plateauCoordinates.Add(int.Parse(coord));
-                }
-                catch (System.FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                    return false;
-                }
+            { 
+                plateauCoordinates.Add(int.Parse(coord));                
             }
 
             if (plateauCoordinates.Count > 2)
             {
-                Console.WriteLine("Just enter two numbers followed by a space in between them!");
-                return false;
+                throw new ArgumentException("Just enter two numbers followed by a space in between them!");
             }
 
             if (plateauCoordinates[0] < ZERO || plateauCoordinates[1] < ZERO)
             {
                 throw new ArgumentException("Position must be more than zero!");
             }
-            else
-            {
-                return true;
-            }
         }
-
-        public bool checkInputForRover(int x, int y, char o)
+ 
+        public void checkInputForRover(string[] input)
+        {
+            checkInputForRover(int.Parse(input[0]), int.Parse(input[1]), Convert.ToChar(input[2]));
+        }
+        public void checkInputForRover(int x, int y, char o)
         {
             if (x < ZERO || y < ZERO)
             {
@@ -51,10 +42,6 @@ namespace MarsRover
             else if (!VALID_ORIENTATION.Contains(o.ToString()))
             {
                 throw new ArgumentException("Orentation must be N, E, S or W!");
-            }
-            else
-            {
-                return true;
             }
         }
     }

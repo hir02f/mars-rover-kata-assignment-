@@ -109,12 +109,25 @@ namespace MarsRover.Tests
             Assert.That(ex.Message, Is.EqualTo("Position given is not within Plateau dimensions!"));
         }
 
-        /*
-testRover.PlaceInPosition(3, 1, 'N');
-testRover.CurrentPosition.X.Should().Be(3);
-testRover.CurrentPosition.Y.Should().Be(1);
-testRover.CurrentOrientation.O.Should().Be('N');*/
+        [Test]
+        public void Correct_Rover_Positioning()
+        {
+            string plateauInput = "10 10";
+            string[] plateauInputArray = plateauInput.Split(' ');
+            List<int> validatedPlateauCoordinates = new List<int> { };
+            userInterface.checkInputForPlateau(plateauInputArray, validatedPlateauCoordinates);
 
+            MissionControl missionControl = new MissionControl();
+            missionControl.SetPlateau(validatedPlateauCoordinates[0], validatedPlateauCoordinates[1]);
 
+            string roverInput = "3 5 W";
+            string[] roverInputArray = roverInput.Split(' ');
+
+            userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
+            missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
+            missionControl.TestRover.CurrentPosition.X.Should().Be(3);
+            missionControl.TestRover.CurrentPosition.Y.Should().Be(5);
+            missionControl.TestRover.CurrentOrientation.O.Should().Be('W');
+        }        
     }
 }

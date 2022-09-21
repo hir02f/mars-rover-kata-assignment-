@@ -11,19 +11,8 @@ namespace MarsRover
     {
         public Plateau Plateau { get; private set; }
 
-        public List<Rover> Rovers { get; private set; }
-
-        /*  public Position _position { get; private set; }
-
-          public MissionControl(Plateau plateau, Position position)
-          {
-              _plateau = plateau;
-              _position = position;
-          }
-
-          */
-
-
+ //       public List<Rover> Rovers { get; private set; }
+        public Rover TestRover { get; private set; }
         public void SetPlateau(int x, int y)
         {
             Plateau = new Plateau(x, y);
@@ -32,8 +21,8 @@ namespace MarsRover
 
         public void SetRovers(int x, int y, char o)
         {
-            Rover testRover = new Rover(Plateau);
-            testRover.PlaceInPosition(x, y, o);
+            TestRover = new Rover(Plateau);
+            TestRover.PlaceInPosition(x, y, o);
 
            /* if (L or R)
             {

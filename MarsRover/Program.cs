@@ -29,7 +29,8 @@ string[] roverInputArray = roverInput.Split(' ');
 
 try
 {
-    userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY); 
+    userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
+    missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
 }
 catch (Exception e)
 {

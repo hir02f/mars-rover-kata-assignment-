@@ -1,6 +1,7 @@
 ﻿using MarsRover;
 
 UserInterface userInterface = new UserInterface();
+MissionControl missionControl = new MissionControl();
 
 // Plateau input
 // -------------
@@ -12,7 +13,7 @@ List<int> validatedPlateauCoordinates = new List<int> {};
 try
 {
     userInterface.checkInputForPlateau(plateauInputArray, validatedPlateauCoordinates);    
-    new MissionControl().SetPlateau(validatedPlateauCoordinates[0], validatedPlateauCoordinates[1]);    
+    missionControl.SetPlateau(validatedPlateauCoordinates[0], validatedPlateauCoordinates[1]);    
 }
 catch (Exception e)
 {
@@ -28,7 +29,7 @@ string[] roverInputArray = roverInput.Split(' ');
 
 try
 {
-    userInterface.checkInputForRover(roverInputArray); 
+    userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY); 
 }
 catch (Exception e)
 {

@@ -4,7 +4,10 @@ namespace MarsRover.Tests;
 
 public class Positioning
 {
-    // Same plateau for all tests, knows each testrover on it
+    /*
+     * Same plateau for all tests
+     */
+
     Plateau testPlateau = new Plateau(5, 4);
   
     [SetUp]
@@ -18,28 +21,7 @@ public class Positioning
         testPlateau.MaxX.Should().Be(5);
         testPlateau.MaxY.Should().Be(4);
     }
-
-    [Test]
-    public void Setting_Rover_In_An_Invalid_Position_Due_To_XY()
-    {
-        Rover testRover = new Rover(testPlateau);
-
-        var ex = Assert.Throws<ArgumentException>(() => testRover.PlaceInPosition(6, 1, 'N'));
-        Assert.That(ex.Message, Is.EqualTo("Position is bigger than Plateau dimensions!"));
-
-        ex = Assert.Throws<ArgumentException>(() => testRover.PlaceInPosition(6, -1, 'N'));
-        Assert.That(ex.Message, Is.EqualTo("Position must be more than zero!"));
-    }
-
-    [Test]
-    public void Setting_Rover_In_An_Invalid_Position_Due_To_Orientation()
-    {
-        Rover testRover = new Rover(testPlateau);
-
-        var ex = Assert.Throws<ArgumentException>(() => testRover.PlaceInPosition(6, 1, 'K'));
-        Assert.That(ex.Message, Is.EqualTo("Orentation must be N, E, S or W!"));
-    }
-    
+     
     [Test]
     public void Setting_First_Rover_In_A_Valid_Position()
     {    

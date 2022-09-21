@@ -13,7 +13,6 @@ namespace MarsRover
         public Plateau Plateau { get; private set; }
         public Orientation CurrentOrientation { get; private set; }    
 
-        private const string VALID_ORIENTATION = "N|E|S|W";
         private const char NORTH = 'N';
         private const char SOUTH = 'S';
         private const char EAST = 'E';
@@ -26,31 +25,16 @@ namespace MarsRover
         }
 
         public void PlaceInPosition(int x, int y, char o)
-        {        
-            if (x < 0 || y < 0)
+        {
+            if (Plateau.PositionIsAvailable(x, y))
             {
-                throw new ArgumentException("Position must be more than zero!");
-            }
-            else if (!VALID_ORIENTATION.Contains(o.ToString()))
-            {
-                throw new ArgumentException("Orentation must be N, E, S or W!");
-            }
-            else if (x > Plateau.MaxX || y > Plateau.MaxY)
-            {
-                throw new ArgumentException("Position is bigger than Plateau dimensions!");
+                CurrentPosition = new Position(x, y);
+                CurrentOrientation = new Orientation(o);
+                Plateau.AddToGrid(x, y);
             }
             else
             {
-                if (Plateau.PositionIsAvailable(x, y))
-                {
-                    CurrentPosition = new Position(x, y);
-                    CurrentOrientation = new Orientation(o);
-                    Plateau.AddToGrid(x, y);
-                }
-                else
-                {
-                    throw new ArgumentException("Position has a rover already!");
-                }
+                throw new ArgumentException("Position has a rover already!");
             }
         }
         public void MoveToNewPosition()

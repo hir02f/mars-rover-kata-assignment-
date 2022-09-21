@@ -25,15 +25,16 @@ namespace MarsRover
 
             if (plateauCoordinates[0] < ZERO || plateauCoordinates[1] < ZERO)
             {
-                throw new ArgumentException("Position must be more than zero!");
+                throw new ArgumentException("Plateau coordinates must be positive!");
             }
         }
  
-        public void checkInputForRover(string[] input)
+        public void checkInputForRover(string[] input, int maxX, int maxY)
         {
-            checkInputForRover(int.Parse(input[0]), int.Parse(input[1]), Convert.ToChar(input[2]));
+            checkInputForRover(int.Parse(input[0]), int.Parse(input[1]), Convert.ToChar(input[2]), maxX, maxY);
         }
-        public void checkInputForRover(int x, int y, char o)
+
+        private void checkInputForRover(int x, int y, char o, int maxX, int maxY)
         {
             if (x < ZERO || y < ZERO)
             {
@@ -41,7 +42,11 @@ namespace MarsRover
             }
             else if (!VALID_ORIENTATION.Contains(o.ToString()))
             {
-                throw new ArgumentException("Orentation must be N, E, S or W!");
+                throw new ArgumentException("Orientation must be N, E, S or W!");
+            }
+            else if (x > maxX || y > maxY)
+            {
+                throw new ArgumentException("Position given is not within Plateau dimensions!");
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestPlatform.CrossPlatEngine;
+﻿using System.Diagnostics.Metrics;
+using Microsoft.VisualStudio.TestPlatform.CrossPlatEngine;
 
 namespace MarsRover.Tests
 {
@@ -109,25 +110,27 @@ namespace MarsRover.Tests
             Assert.That(ex.Message, Is.EqualTo("Position given is not within Plateau dimensions!"));
         }
 
-  /*      [Test]  --> Move to Test Positioning
-        public void Correct_Rover_Positioning()
+        /*
+         *  Rover movement tests
+         *  ====================
+         */
+
+        [Test]
+        public void Invalid_Movement_Instructions_Given()
         {
-            string plateauInput = "10 10";
-            string[] plateauInputArray = plateauInput.Split(' ');
-            List<int> validatedPlateauCoordinates = new List<int> { };
-            userInterface.checkInputForPlateau(plateauInputArray, validatedPlateauCoordinates);
+            string roverInstructions = "LMMMK";
 
-            MissionControl missionControl = new MissionControl();
-            missionControl.SetPlateau(validatedPlateauCoordinates[0], validatedPlateauCoordinates[1]);
+            var ex = Assert.Throws<ArgumentException>(() => userInterface.checkInputForMovement(roverInstructions));
+            Assert.That(ex.Message, Is.EqualTo("Movment must be either L, R or M!"));
+        }
 
-            string roverInput = "3 5 W";
-            string[] roverInputArray = roverInput.Split(' ');
+        [Test]
+        public void Movement_Instructions_Given_Is_Null_Or_Empty()
+        {
+            string roverInstructions = "";
 
-            userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
-            missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
-            missionControl.CurrentRover.CurrentPosition.X.Should().Be(3);
-            missionControl.CurrentRover.CurrentPosition.Y.Should().Be(5);
-            missionControl.CurrentRover.CurrentOrientation.O.Should().Be('W');
-        }     */   
+            var ex = Assert.Throws<ArgumentException>(() => userInterface.checkInputForMovement(roverInstructions));
+            Assert.That(ex.Message, Is.EqualTo("Enter valid movement instructions!"));
+        }  
     }
 }

@@ -22,7 +22,7 @@ namespace MarsRover.Tests
             testRover.CurrentOrientation.O.Should().Be('W'); // New Orientation
 
             // M
-            testRover.MoveToNewPosition();
+            testRover.MoveToNewPosition(false);
             testRover.CurrentPosition.X.Should().Be(0);      // New position
             testRover.CurrentPosition.Y.Should().Be(2);      // New position
             testRover.CurrentOrientation.O.Should().Be('W'); // Same Orientation
@@ -32,7 +32,7 @@ namespace MarsRover.Tests
             testRover.CurrentOrientation.O.Should().Be('S'); // New Orientation
 
             // M
-            testRover.MoveToNewPosition();
+            testRover.MoveToNewPosition(false);
             testRover.CurrentPosition.X.Should().Be(0);      // New position
             testRover.CurrentPosition.Y.Should().Be(1);      // New position
             testRover.CurrentOrientation.O.Should().Be('S'); // Same Orientation
@@ -42,7 +42,7 @@ namespace MarsRover.Tests
             testRover.CurrentOrientation.O.Should().Be('E'); // New Orientation
 
             // M
-            testRover.MoveToNewPosition();
+            testRover.MoveToNewPosition(true);
             testRover.CurrentPosition.X.Should().Be(1);      // New position
             testRover.CurrentPosition.Y.Should().Be(1);      // New position
             testRover.CurrentOrientation.O.Should().Be('E'); // Same Orientation
@@ -52,19 +52,19 @@ namespace MarsRover.Tests
             testRover.CurrentOrientation.O.Should().Be('N'); // New Orientation
 
             // M
-            testRover.MoveToNewPosition();
+            testRover.MoveToNewPosition(true);
             testRover.CurrentPosition.X.Should().Be(1);      // New position
             testRover.CurrentPosition.Y.Should().Be(2);      // New position
             testRover.CurrentOrientation.O.Should().Be('N'); // Same Orientation
 
             // M
-            testRover.MoveToNewPosition();
+            testRover.MoveToNewPosition(true);
             testRover.CurrentPosition.X.Should().Be(1);      // New position
             testRover.CurrentPosition.Y.Should().Be(3);      // New position
             testRover.CurrentOrientation.O.Should().Be('N'); // Same Orientation                                                       
         }
-
-        [Test]
+        // NEED TO FIX THIS TEST NEXT!
+        [Test] 
         public void Moving_To_A_Coordinate_That_Has_A_Rover() // (1,3) has a rover from above test
         {
             Rover testRover = new Rover(testPlateau);

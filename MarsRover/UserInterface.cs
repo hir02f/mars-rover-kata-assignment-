@@ -9,6 +9,7 @@ namespace MarsRover
     public class UserInterface
     {
         private const string VALID_ORIENTATION = "N|E|S|W";
+        private const string VALID_MOVEMENT = "L|R|M";
         private const int ZERO = 0; 
 
         public void checkInputForPlateau(string[] plateauInputArray, List<int> plateauCoordinates)
@@ -47,6 +48,25 @@ namespace MarsRover
             else if (x > maxX || y > maxY)
             {
                 throw new ArgumentException("Position given is not within Plateau dimensions!");
+            }
+        }
+
+        public void checkInputForMovement(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+            {
+                throw new ArgumentException("Enter valid movement instructions!");
+            }
+
+            char[] movement = input.ToCharArray();
+
+            foreach (char m in movement)
+            {
+                Console.WriteLine(m);
+                if (!VALID_MOVEMENT.Contains(m.ToString()))
+                {
+                    throw new ArgumentException("Movment must be either L, R or M!");
+                }
             }
         }
     }

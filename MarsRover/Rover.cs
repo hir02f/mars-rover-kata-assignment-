@@ -30,6 +30,19 @@ namespace MarsRover
             CurrentOrientation = new Orientation(o);
         }
 
+        public void MoveToNewPosition(bool maths)
+        {
+            if (CurrentOrientation.O == NORTH || CurrentOrientation.O == SOUTH)
+            {
+                CurrentPosition.SetY(maths);
+            }
+            else if (CurrentOrientation.O == EAST || CurrentOrientation.O == WEST)
+            {
+                CurrentPosition.SetX(maths);
+            }
+
+        }
+
         public void MoveToNewPosition()  // split this up, use WhereRoversAre rather than addtogrid jasmine
         {
             if (CurrentOrientation.O == NORTH)

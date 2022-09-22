@@ -8,6 +8,7 @@ namespace MarsRover
 {
     public interface IMove
     {
-        void MoveToNewPosition(); 
-    }
+        void MoveToNewPosition();
+        void MoveToNewPosition(bool input); 
+    }    
 }

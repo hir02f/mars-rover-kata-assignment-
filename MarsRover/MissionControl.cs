@@ -13,6 +13,11 @@ namespace MarsRover
         public Dictionary<Tuple<int, int>, Rover> WhereRoversAre { get; private set; }
         public Rover CurrentRover { get; private set; }
 
+        private const char NORTH = 'N';
+        private const char SOUTH = 'S';
+        private const char EAST = 'E';
+        private const char WEST = 'W';
+        private const int ONE_UNIT = 1;
         public MissionControl()
         {
             WhereRoversAre = new Dictionary<Tuple<int, int>, Rover>();
@@ -28,13 +33,33 @@ namespace MarsRover
             Console.WriteLine("whereroversare? " + WhereRoversAre.ContainsKey(new Tuple<int, int> (x, y)));
             if (!WhereRoversAre.ContainsKey((new Tuple<int, int>(x, y)))) 
             {
-                CurrentRover = new Rover(Plateau);  // rewrite test positioning to test this code, and remove redundant code
+                CurrentRover = new Rover(Plateau);  
                 CurrentRover.PlaceInPosition(x, y, o);
                 WhereRoversAre.Add(new Tuple<int, int>(x, y), CurrentRover);
             }
             else
             {
                 throw new ArgumentException("Position has a rover already!");
+            }
+
+        }
+
+        public void ManageRoverMoment()
+        {
+            if (CurrentRover.CurrentOrientation.O == NORTH)
+            {
+                if (!WhereRoversAre.ContainsKey(new Tuple<int, int> (CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + ONE_UNIT)))
+                {
+                    WhereRoversAre.Remove(new Tuple<int, int> (CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
+                    CurrentRover.CurrentPosition.SetY(true);
+                    WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
+                }
+                else
+                {
+                    string errorMsg;
+                    errorMsg = String.Format("Position ({0}, {1}) has a rover already!", CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + 1);
+                    throw new ArgumentException(errorMsg);
+                }
             }
 
         }

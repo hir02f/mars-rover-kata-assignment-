@@ -49,5 +49,17 @@ catch (Exception e)
  * ------------------------
  */
 Console.WriteLine("Now enter the Rover's movement instructions");
+string roverMovement = Console.ReadLine();
+
+try
+{
+    userInterface.checkInputForMovement(roverMovement);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+    return;
+}
+
 
 

@@ -26,18 +26,11 @@ namespace MarsRover
 
         public void PlaceInPosition(int x, int y, char o)
         {
-            if (Plateau.PositionIsAvailable(x, y))
-            {
-                CurrentPosition = new Position(x, y);
-                CurrentOrientation = new Orientation(o);
-                Plateau.AddToGrid(x, y);
-            }
-            else
-            {
-                throw new ArgumentException("Position has a rover already!");
-            }
+            CurrentPosition = new Position(x, y);
+            CurrentOrientation = new Orientation(o);
         }
-        public void MoveToNewPosition()
+
+        public void MoveToNewPosition()  // split this up, use WhereRoversAre rather than addtogrid jasmine
         {
             if (CurrentOrientation.O == NORTH)
             {

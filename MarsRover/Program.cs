@@ -53,7 +53,9 @@ string roverMovement = Console.ReadLine();
 
 try
 {
-    userInterface.checkInputForMovement(roverMovement);
+    char[] instructions = userInterface.checkInputForMovement(roverMovement);
+    missionControl.ManageRoverMoment(instructions);
+    Console.Write("Rover is at position: " + missionControl.CurrentRover.CurrentPosition.X + " " + missionControl.CurrentRover.CurrentPosition.Y + " " + missionControl.CurrentRover.CurrentOrientation.O);
 }
 catch (Exception e)
 {

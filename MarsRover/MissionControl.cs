@@ -17,6 +17,9 @@ namespace MarsRover
         private const char SOUTH = 'S';
         private const char EAST = 'E';
         private const char WEST = 'W';
+        private const char LEFT = 'L';
+        private const char RIGHT = 'R';
+
         private const int ONE_UNIT = 1;
         public MissionControl()
         {
@@ -44,33 +47,79 @@ namespace MarsRover
 
         }
 
-        public void ManageRoverMoment()
+        public void ManageRoverMoment(char[] instructions) // finish this method
         {
-            if (CurrentRover.CurrentOrientation.O == NORTH)
+            foreach (char ins in instructions)
             {
-                if (!WhereRoversAre.ContainsKey(new Tuple<int, int> (CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + ONE_UNIT)))
+                if (ins == LEFT || ins == RIGHT)
                 {
-                    WhereRoversAre.Remove(new Tuple<int, int> (CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
-                    CurrentRover.CurrentPosition.SetY(true);
-                    WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
+                    CurrentRover.CurrentOrientation.GetNewOrientation(ins);
+
                 }
                 else
                 {
-                    string errorMsg;
-                    errorMsg = String.Format("Position ({0}, {1}) has a rover already!", CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + 1);
-                    throw new ArgumentException(errorMsg);
+                    if (CurrentRover.CurrentOrientation.O == NORTH)
+                    {
+                        if (!WhereRoversAre.ContainsKey(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + ONE_UNIT)))
+                        {
+                            WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
+                            CurrentRover.CurrentPosition.SetY(true);
+                            WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
+                        }
+                        else
+                        {
+                            string errorMsg;
+                            errorMsg = String.Format("Position ({0}, {1}) has a rover already!", CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + 1);
+                            throw new ArgumentException(errorMsg);
+                        }
+                    }
+                    else if (CurrentRover.CurrentOrientation.O == SOUTH)
+                    {
+                        if (!WhereRoversAre.ContainsKey(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y - ONE_UNIT)))
+                        {
+                            WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
+                            CurrentRover.CurrentPosition.SetY(false);
+                            WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
+                        }
+                        else
+                        {
+                            string errorMsg;
+                            errorMsg = String.Format("Position ({0}, {1}) has a rover already!", CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y - 1);
+                            throw new ArgumentException(errorMsg);
+                        }
+                    }
+                    else if (CurrentRover.CurrentOrientation.O == EAST)
+                    {
+                        if (!WhereRoversAre.ContainsKey(new Tuple<int, int>(CurrentRover.CurrentPosition.X + ONE_UNIT, CurrentRover.CurrentPosition.Y)))
+                        {
+                            WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
+                            CurrentRover.CurrentPosition.SetX(true);
+                            WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
+                        }
+                        else
+                        {
+                            string errorMsg;
+                            errorMsg = String.Format("Position ({0}, {1}) has a rover already!", CurrentRover.CurrentPosition.X + ONE_UNIT, CurrentRover.CurrentPosition.Y);
+                            throw new ArgumentException(errorMsg);
+                        }
+                    }
+                    else if (CurrentRover.CurrentOrientation.O == WEST)
+                    {
+                        if (!WhereRoversAre.ContainsKey(new Tuple<int, int>(CurrentRover.CurrentPosition.X - ONE_UNIT, CurrentRover.CurrentPosition.Y)))
+                        {
+                            WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
+                            CurrentRover.CurrentPosition.SetX(false);
+                            WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
+                        }
+                        else
+                        {
+                            string errorMsg;
+                            errorMsg = String.Format("Position ({0}, {1}) has a rover already!", CurrentRover.CurrentPosition.X - ONE_UNIT, CurrentRover.CurrentPosition.Y);
+                            throw new ArgumentException(errorMsg);
+                        }
+                    }
                 }
             }
-
         }
-
-        /* if (L or R)
-         {
-           testRover.CurrentOrientation.GetNewOrientation('L');
-         }
-         else 
-         {
-             testRover.MoveToNewPosition();
-         }*/
     }
 }

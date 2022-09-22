@@ -51,7 +51,7 @@ namespace MarsRover
             }
         }
 
-        public void checkInputForMovement(string input)
+        public char[] checkInputForMovement(string input)
         {
             if (String.IsNullOrEmpty(input))
             {
@@ -68,6 +68,7 @@ namespace MarsRover
                     throw new ArgumentException("Movment must be either L, R or M!");
                 }
             }
+            return movement;
         }
     }
 }

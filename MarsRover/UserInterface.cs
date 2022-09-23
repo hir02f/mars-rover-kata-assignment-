@@ -62,7 +62,6 @@ namespace MarsRover
 
             foreach (char m in movement)
             {
-                Console.WriteLine(m);
                 if (!VALID_MOVEMENT.Contains(m.ToString()))
                 {
                     throw new ArgumentException("Movment must be either L, R or M!");

@@ -30,15 +30,7 @@ namespace MarsRover
         {
             string lookFor = O.ToString() + instruction.ToString();
 
-            if (OrientationLookup.ContainsKey(lookFor))
-            {
-                // New orientation is now the current orientation
-                O = OrientationLookup[lookFor];
-            }
-            else
-            {
-                throw new ArgumentException("Invalid orientation movement!");
-            }
+            O = OrientationLookup.ContainsKey(lookFor) ? OrientationLookup[lookFor] : throw new ArgumentException("Invalid orientation movement!"); 
         }
     }
 }

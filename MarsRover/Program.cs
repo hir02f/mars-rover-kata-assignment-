@@ -24,44 +24,50 @@ catch (Exception e)
     return;
 }
 
-/*
- * Rover input for position
- * ------------------------
- */
-Console.WriteLine("Now enter the Rover's coordinates and orientation");
-string roverInput = Console.ReadLine();
-string[] roverInputArray = roverInput.Split(' ');
-Console.WriteLine("The Rover is ready.");
 
-try
+bool userWantsToExit = false;
+while (!userWantsToExit)
 {
-    userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
-    missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.Message);
-    return;
-}
+    /*
+     * Rover input for position
+     * ------------------------
+     */
+    Console.WriteLine("Place a Rover by entering its coordinates and orientation");
+    string roverInput = Console.ReadLine();
+    string[] roverInputArray = roverInput.Split(' ');
 
-/*
- * Rover input for movement - next need to code for multiple rovers being inputted in one session
- * ------------------------
- */
-Console.WriteLine("Now enter the Rover's movement instructions");
-string roverMovement = Console.ReadLine();
+    try
+    {
+        userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
+        missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
+        Console.WriteLine("The Rover is ready.");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+        return;
+    }
 
-try
-{
-    char[] instructions = userInterface.checkInputForMovement(roverMovement);
-    missionControl.ManageRoverMoment(instructions);
-    Console.Write("Rover is at position: " + missionControl.CurrentRover.CurrentPosition.X + " " + missionControl.CurrentRover.CurrentPosition.Y + " " + missionControl.CurrentRover.CurrentOrientation.O);
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.Message);
-    return;
-}
+    /*
+     * Rover input for movement
+     * ------------------------
+     */
+    Console.WriteLine("Now enter the Rover's movement instructions");
+    string roverMovement = Console.ReadLine();
 
+    try
+    {
+        char[] instructions = userInterface.checkInputForMovement(roverMovement);
+        missionControl.ManageRoverMoment(instructions);
+        Console.WriteLine("Rover is at position: " + missionControl.CurrentRover.CurrentPosition.X + " " + missionControl.CurrentRover.CurrentPosition.Y + " " + missionControl.CurrentRover.CurrentOrientation.O);
+        Console.WriteLine("Type 'exit' to exit or press enter to continue with the next Rover.");
+        userWantsToExit = Console.ReadLine() == "exit";
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+        return;
+    }
+}
 
 

@@ -22,6 +22,7 @@ namespace MarsRover
         private const char RIGHT = 'R';
 
         private const int ONE_UNIT = 1;
+        private const int ZERO = 0;
         public MissionControl()
         {
             WhereRoversAre = new Dictionary<Tuple<int, int>, Rover>();
@@ -53,8 +54,13 @@ namespace MarsRover
 
             string outsidePlateauErrorMsg;
             outsidePlateauErrorMsg = String.Format("Rover cannot move outside Plateau area!");
+            
+            string negativeCoordinatesErrorMsg;
+            negativeCoordinatesErrorMsg = String.Format("Rover cannot move to negative coordinates!");
 
-            return WhereRoversAre.ContainsKey(new Tuple<int, int> (x, y)) ? throw new ArgumentException(hasRoverErrorMsg) : x > Plateau.MaxX || y > Plateau.MaxY ? throw new ArgumentException(outsidePlateauErrorMsg) : true;
+            return WhereRoversAre.ContainsKey(new Tuple<int, int> (x, y)) ? throw new ArgumentException(hasRoverErrorMsg) : 
+                x > Plateau.MaxX || y > Plateau.MaxY ? throw new ArgumentException(outsidePlateauErrorMsg) : 
+                x < ZERO || y < ZERO ? throw new ArgumentException(negativeCoordinatesErrorMsg) : true;
         }
 
         public void ManageRoverMoment(char[] instructions)
@@ -64,7 +70,6 @@ namespace MarsRover
                 if (ins == LEFT || ins == RIGHT)
                 {
                     CurrentRover.CurrentOrientation.GetNewOrientation(ins);
-
                 }
                 else
                 {

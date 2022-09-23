@@ -10,7 +10,6 @@
         private const char SOUTH = 'S';
         private const char EAST = 'E';
         private const char WEST = 'W';
-        private const int ONE_UNIT = 1;
 
         public Rover(Plateau plateau)
         {

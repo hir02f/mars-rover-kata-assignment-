@@ -84,5 +84,35 @@ namespace MarsRover.Tests
             var ex = Assert.Throws<ArgumentException>(() => missionControl.ManageRoverMoment(movementInstructions));
             Assert.That(ex.Message, Is.EqualTo("Rover cannot move outside Plateau area!"));
         }
+
+        [Test]
+        public void Moving_To_A_Negative_Coordinate_X() 
+        {
+            // Initial position and orientation
+            string roverInput = "0 0 W";
+            string[] roverInputArray = roverInput.Split(' ');
+            userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
+            missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
+
+            // Movement Instructions
+            char[] movementInstructions = new char[] { 'M' };
+            var ex = Assert.Throws<ArgumentException>(() => missionControl.ManageRoverMoment(movementInstructions));
+            Assert.That(ex.Message, Is.EqualTo("Rover cannot move to negative coordinates!"));
+        }
+
+        [Test]
+        public void Moving_To_A_Negative_Coordinate_Y()
+        {
+            // Initial position and orientation
+            string roverInput = "5 0 S";
+            string[] roverInputArray = roverInput.Split(' ');
+            userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
+            missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
+
+            // Movement Instructions
+            char[] movementInstructions = new char[] { 'M' };
+            var ex = Assert.Throws<ArgumentException>(() => missionControl.ManageRoverMoment(movementInstructions));
+            Assert.That(ex.Message, Is.EqualTo("Rover cannot move to negative coordinates!"));
+        }
     }
 }

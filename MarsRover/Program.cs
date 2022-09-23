@@ -60,7 +60,7 @@ while (!userWantsToExit)
         char[] instructions = userInterface.checkInputForMovement(roverMovement);
         missionControl.ManageRoverMoment(instructions);
         Console.WriteLine("Rover is at position: " + missionControl.CurrentRover.CurrentPosition.X + " " + missionControl.CurrentRover.CurrentPosition.Y + " " + missionControl.CurrentRover.CurrentOrientation.O);
-        Console.WriteLine("Type 'exit' to exit or press enter to continue with the next Rover.");
+        Console.WriteLine("Type 'exit' to exit or press 'enter' to continue with the next Rover.");
         userWantsToExit = Console.ReadLine() == "exit";
     }
     catch (Exception e)

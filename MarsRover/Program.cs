@@ -45,7 +45,7 @@ catch (Exception e)
 }
 
 /*
- * Rover input for movement
+ * Rover input for movement - next need to code for multiple rovers being inputted in one session
  * ------------------------
  */
 Console.WriteLine("Now enter the Rover's movement instructions");

@@ -69,5 +69,20 @@ namespace MarsRover.Tests
             var ex = Assert.Throws<ArgumentException>(() => missionControl.ManageRoverMoment(movementInstructions));
             Assert.That(ex.Message, Is.EqualTo("Position (1, 3) has a rover already!"));
         }
+
+        [Test]
+        public void Moving_To_A_Coordinate_Outside_Plateau_Area() // Cannot move to (1, 6) as Plateu is 5 5
+        {
+            // Initial position and orientation
+            string roverInput = "1 5 N";
+            string[] roverInputArray = roverInput.Split(' ');
+            userInterface.checkInputForRover(roverInputArray, missionControl.Plateau.MaxX, missionControl.Plateau.MaxY);
+            missionControl.SetRovers(int.Parse(roverInputArray[0]), int.Parse(roverInputArray[1]), Convert.ToChar(roverInputArray[2]));
+        
+            // Movement Instructions
+            char[] movementInstructions = new char[] { 'M' };
+            var ex = Assert.Throws<ArgumentException>(() => missionControl.ManageRoverMoment(movementInstructions));
+            Assert.That(ex.Message, Is.EqualTo("Rover cannot move outside Plateau area!"));
+        }
     }
 }

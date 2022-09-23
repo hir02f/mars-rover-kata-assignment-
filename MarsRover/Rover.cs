@@ -11,11 +11,6 @@
         private const char EAST = 'E';
         private const char WEST = 'W';
 
-        public Rover(Plateau plateau)
-        {
-            Plateau = plateau;
-        }
-
         public void PlaceInPosition(int x, int y, char o)
         {
             CurrentPosition = new Position(x, y);

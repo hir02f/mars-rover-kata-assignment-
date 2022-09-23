@@ -30,8 +30,7 @@ public class Positioning
     [Test]
     public void Setting_First_Rover_In_A_Valid_Position_Using_Rover_Class()
     {
-        Plateau testPlateau = new Plateau(5, 5);
-        Rover testRover = new Rover(testPlateau);
+        Rover testRover = new Rover();
 
         testRover.PlaceInPosition(3, 1, 'N');
         testRover.CurrentPosition.X.Should().Be(3);

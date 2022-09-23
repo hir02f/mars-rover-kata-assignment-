@@ -36,7 +36,7 @@ namespace MarsRover
         {
             if (!WhereRoversAre.ContainsKey((new Tuple<int, int>(x, y)))) 
             {
-                CurrentRover = new Rover(Plateau);  
+                CurrentRover = new Rover();  
                 CurrentRover.PlaceInPosition(x, y, o);
                 WhereRoversAre.Add(new Tuple<int, int>(x, y), CurrentRover);
             }

@@ -13,7 +13,12 @@ The brief of this project is set out in the file “Mars Rover Kata – The Brie
 
 ## How to use the Console
 
-First type ```dotnet run``` and follow the instructions given.
+First type ```dotnet run``` and follow the instructions given. Note that the input is case sensitive and needs to follow the guide as per the brief.
+Otherwise, the program will end with an error message and you have to start again.
+Valid inputs examples: 
+- 10 10 (for Plateau size)
+- 0 1 N (for placing a Rover on the Plateau)
+- MRMMLMLM (for telling the Rover how to move) ...etc
 
 ## How to test
 
@@ -44,3 +49,6 @@ The current plateau is a quadrilateral grid consisting of positive coordinates. 
 
 ### Rover
 Rovers can be enhanced to have cameras, robot arms and storage areas. More classes need to be created for these purposes.
+
+### Obstructions and aliens
+Some fun can be had by having a random function place obstrucionts and aliens on the grid. Mission Control would need methods to avoid these and if Rovers are hit/damaged, it would need an attribute to note so. 

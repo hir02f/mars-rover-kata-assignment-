@@ -17,15 +17,15 @@
             CurrentOrientation = new Orientation(o);
         }
 
-        public void MoveToNewPosition(bool maths)
+        public void MoveToNewPosition(bool isAddition)
         {
             if (CurrentOrientation.O == NORTH || CurrentOrientation.O == SOUTH)
             {
-                CurrentPosition.SetY(maths);
+                CurrentPosition.SetY(isAddition);
             }
             else if (CurrentOrientation.O == EAST || CurrentOrientation.O == WEST)
             {
-                CurrentPosition.SetX(maths);
+                CurrentPosition.SetX(isAddition);
             }
         }
     }

@@ -15,14 +15,14 @@
             }
         }
 
-        public void SetY(bool input)
+        public void SetY(bool isAddition)
         {
-            Y = input ? Y + ONE_UNIT : Y - ONE_UNIT;
+            Y = isAddition ? Y + ONE_UNIT : Y - ONE_UNIT;
         }
 
-        public void SetX(bool input)
+        public void SetX(bool isAddition)
         {
-            X = input ? X + ONE_UNIT : X - ONE_UNIT;
+            X = isAddition ? X + ONE_UNIT : X - ONE_UNIT;
         }
     }
 }

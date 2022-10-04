@@ -10,20 +10,21 @@ namespace MarsRover
     {
         public char O { get; private set; }
 
-        private Dictionary<string, char> OrientationLookup = new Dictionary<string, char>();
- 
-        public Orientation(char o)
+        private Dictionary<string, char> OrientationLookup = new Dictionary<string, char>() 
         {
-            O = o;
-
-            OrientationLookup.Add("NL", 'W');
-            OrientationLookup.Add("NR", 'E');
-            OrientationLookup.Add("WL", 'S');
-            OrientationLookup.Add("WR", 'N');
-            OrientationLookup.Add("EL", 'N');
-            OrientationLookup.Add("ER", 'S');
-            OrientationLookup.Add("SL", 'E');
-            OrientationLookup.Add("SR", 'W');
+            { "NL", 'W' },
+            { "NR", 'E' },
+            { "WL", 'S' },
+            { "WR", 'N' },
+            { "EL", 'N' },
+            { "ER", 'S' },
+            { "SL", 'E' },
+            { "SR", 'W' }
+        };
+ 
+        public Orientation(char orientation)
+        {
+            O = orientation;
         }
 
         public void GetNewOrientation(char instruction)

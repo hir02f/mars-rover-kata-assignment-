@@ -1,15 +1,12 @@
-﻿namespace MarsRover
+﻿using MarsRover.Configuration;
+
+namespace MarsRover
 {
     public class Rover : IMove
     {
         public Position CurrentPosition { get; private set; }
         public Plateau Plateau { get; private set; }
         public Orientation CurrentOrientation { get; private set; }    
-
-        private const char NORTH = 'N';
-        private const char SOUTH = 'S';
-        private const char EAST = 'E';
-        private const char WEST = 'W';
 
         public void PlaceInPosition(int x, int y, char o)
         {
@@ -19,11 +16,11 @@
 
         public void MoveToNewPosition(bool isAddition)
         {
-            if (CurrentOrientation.O == NORTH || CurrentOrientation.O == SOUTH)
+            if (CurrentOrientation.O == MissionControlDefinitions.NORTH || CurrentOrientation.O == MissionControlDefinitions.SOUTH)
             {
                 CurrentPosition.SetY(isAddition);
             }
-            else if (CurrentOrientation.O == EAST || CurrentOrientation.O == WEST)
+            else if (CurrentOrientation.O == MissionControlDefinitions.EAST || CurrentOrientation.O == MissionControlDefinitions.WEST)
             {
                 CurrentPosition.SetX(isAddition);
             }

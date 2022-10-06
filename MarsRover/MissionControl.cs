@@ -5,6 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using MarsRover.Configuration;
 
 namespace MarsRover
 {
@@ -14,16 +15,7 @@ namespace MarsRover
         public Dictionary<Tuple<int, int>, Rover> WhereRoversAre { get; private set; }
         public Rover CurrentRover { get; private set; }
 
-        private const char NORTH = 'N';
-        private const char SOUTH = 'S';
-        private const char EAST = 'E';
-        private const char WEST = 'W';
-        private const char LEFT = 'L';
-        private const char RIGHT = 'R';
-
-        private const int ONE_UNIT = 1;
-        private const int ZERO = 0;
-        public MissionControl()
+         public MissionControl()
         {
             WhereRoversAre = new Dictionary<Tuple<int, int>, Rover>();
         }
@@ -60,43 +52,43 @@ namespace MarsRover
 
             return WhereRoversAre.ContainsKey(new Tuple<int, int> (x, y)) ? throw new ArgumentException(hasRoverErrorMsg) : 
                 x > Plateau.MaxX || y > Plateau.MaxY ? throw new ArgumentException(outsidePlateauErrorMsg) : 
-                x < ZERO || y < ZERO ? throw new ArgumentException(negativeCoordinatesErrorMsg) : true;
+                x < 0 || y < 0 ? throw new ArgumentException(negativeCoordinatesErrorMsg) : true;
         }
 
         public void ManageRoverMoment(char[] instructions)
         {
             foreach (char ins in instructions)
             {
-                if (ins == LEFT || ins == RIGHT)
+                if (ins == MissionControlDefinitions.LEFT || ins == MissionControlDefinitions.RIGHT)
                 {
                     CurrentRover.CurrentOrientation.GetNewOrientation(ins);
                 }
                 else
                 {
-                    if (CurrentRover.CurrentOrientation.O == NORTH)
+                    if (CurrentRover.CurrentOrientation.O == MissionControlDefinitions.NORTH)
                     {
-                        CheckNewPosition(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + ONE_UNIT);
+                        CheckNewPosition(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y + 1);
                         WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
                         CurrentRover.CurrentPosition.SetY(true);
                         WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
                     }
-                    else if (CurrentRover.CurrentOrientation.O == SOUTH)
+                    else if (CurrentRover.CurrentOrientation.O == MissionControlDefinitions.SOUTH)
                     {
-                        CheckNewPosition(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y - ONE_UNIT);
+                        CheckNewPosition(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y - 1);
                         WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
                         CurrentRover.CurrentPosition.SetY(false);
                         WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
                     }
-                    else if (CurrentRover.CurrentOrientation.O == EAST)
+                    else if (CurrentRover.CurrentOrientation.O == MissionControlDefinitions.EAST)
                     {
-                        CheckNewPosition(CurrentRover.CurrentPosition.X + ONE_UNIT, CurrentRover.CurrentPosition.Y);
+                        CheckNewPosition(CurrentRover.CurrentPosition.X + 1, CurrentRover.CurrentPosition.Y);
                         WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
                         CurrentRover.CurrentPosition.SetX(true);
                         WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
                     }
-                    else if (CurrentRover.CurrentOrientation.O == WEST)
+                    else if (CurrentRover.CurrentOrientation.O == MissionControlDefinitions.WEST)
                     {
-                        CheckNewPosition(CurrentRover.CurrentPosition.X - ONE_UNIT, CurrentRover.CurrentPosition.Y);
+                        CheckNewPosition(CurrentRover.CurrentPosition.X - 1, CurrentRover.CurrentPosition.Y);
                         WhereRoversAre.Remove(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y));
                         CurrentRover.CurrentPosition.SetX(false);
                         WhereRoversAre.Add(new Tuple<int, int>(CurrentRover.CurrentPosition.X, CurrentRover.CurrentPosition.Y), CurrentRover);
